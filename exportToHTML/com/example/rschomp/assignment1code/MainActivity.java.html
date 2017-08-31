@@ -1,0 +1,1434 @@
+<html>
+<head>
+<title>MainActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(0,0,128); font-weight: bold; }
+.s1 { color: rgb(0,0,0); }
+.s2 { color: rgb(0,128,0); font-weight: bold; }
+.s3 { color: rgb(0,0,255); }
+.s4 { color: rgb(128,128,128); font-style: italic; }
+</style>
+</head>
+<BODY BGCOLOR="#ffffff">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MainActivity.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">com.example.rschomp.assignment1code; 
+ 
+</span><span class="s0">import </span><span class="s1">android.content.Context; 
+</span><span class="s0">import </span><span class="s1">android.graphics.Color; 
+</span><span class="s0">import </span><span class="s1">android.graphics.drawable.Drawable; 
+</span><span class="s0">import </span><span class="s1">android.nfc.Tag; 
+</span><span class="s0">import </span><span class="s1">android.support.annotation.IdRes; 
+</span><span class="s0">import </span><span class="s1">android.support.v7.app.AppCompatActivity; 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle; 
+</span><span class="s0">import </span><span class="s1">android.util.Log; 
+</span><span class="s0">import </span><span class="s1">android.view.View; 
+</span><span class="s0">import </span><span class="s1">android.widget.Button; 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView; 
+</span><span class="s0">import </span><span class="s1">android.widget.Toast; 
+ 
+</span><span class="s0">import </span><span class="s1">org.w3c.dom.Text; 
+ 
+</span><span class="s0">import </span><span class="s1">java.util.Random; 
+ 
+</span><span class="s0">public class </span><span class="s1">MainActivity </span><span class="s0">extends </span><span class="s1">AppCompatActivity { 
+ 
+    Button b0, b1, b2, b3, b4, b5, b6, b7, b8, b9, b10, b11, b12, b13, b14, b15; 
+    Button aClicker, bClicker, cClicker, dClicker, eClicker, fClicker, gClicker, 
+            hClicker, iClicker, jClicker; 
+    String colorOfButton; 
+    String b0Color, b1Color, b2Color, b3Color, b4Color, b5Color, b6Color, b7Color, 
+            b8Color, b9Color, b10Color, b11Color, b12Color, b13Color, b14Color, b15Color; 
+    TextView mc, seq; 
+    Boolean aClicked, bClicked, cClicked, dClicked, eClicked, fClicked, gClicked, 
+            hClicked, iClicked, jClicked, restartClicked; 
+    Button rest, aut; 
+    </span><span class="s0">int </span><span class="s1">count; 
+    String sequencePhrase = </span><span class="s2">&quot;Sequence: &quot;</span><span class="s1">; 
+    String moveCountPhrase = </span><span class="s2">&quot;Move Count: &quot;</span><span class="s1">; 
+ 
+    Button clickedList[]; 
+ 
+ 
+    @Override 
+    </span><span class="s0">protected void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState); 
+        setContentView(R.layout.activity_main); 
+ 
+        mc = (TextView)findViewById(R.id.moveCount); 
+        seq = (TextView)findViewById(R.id.sequence); 
+        rest = (Button)findViewById(R.id.restart); 
+        aut = (Button)findViewById(R.id.auto); 
+        buttonInfo(); 
+        clickedList = </span><span class="s0">new </span><span class="s1">Button[</span><span class="s3">10</span><span class="s1">]; 
+ 
+        </span><span class="s4">//for testing combinations</span><span class="s1"> 
+        </span><span class="s4">/* 
+        b0 = (Button)findViewById(R.id.button0); 
+        b0Color = &quot;cyan&quot;; 
+        b0.setBackgroundColor(Color.CYAN); 
+        b0.invalidate(); 
+ 
+        b1 = (Button)findViewById(R.id.button1); 
+        b1Color = &quot;cyan&quot;; 
+        b1.setBackgroundColor(Color.CYAN); 
+        b1.invalidate(); 
+ 
+        b2 = (Button)findViewById(R.id.button2); 
+        b2Color = &quot;cyan&quot;; 
+        b2.setBackgroundColor(Color.CYAN); 
+        b2.invalidate(); 
+ 
+        b3 = (Button)findViewById(R.id.button3); 
+        b3Color = &quot;green&quot;; 
+        b3.setBackgroundColor(Color.GREEN); 
+        b3.invalidate(); 
+ 
+        b4 = (Button)findViewById(R.id.button4); 
+        b4Color = &quot;green&quot;; 
+        b4.setBackgroundColor(Color.GREEN); 
+        b4.invalidate(); 
+ 
+        b5 = (Button)findViewById(R.id.button5); 
+        b5Color = &quot;green&quot;; 
+        b5.setBackgroundColor(Color.GREEN); 
+        b5.invalidate(); 
+ 
+        b6 = (Button)findViewById(R.id.button6); 
+        b6Color = &quot;green&quot;; 
+        b6.setBackgroundColor(Color.GREEN); 
+        b6.invalidate(); 
+ 
+        b7 = (Button)findViewById(R.id.button7); 
+        b7Color = &quot;green&quot;; 
+        b7.setBackgroundColor(Color.GREEN); 
+        b7.invalidate(); 
+ 
+        b8 = (Button)findViewById(R.id.button8); 
+        b8Color = &quot;green&quot;; 
+        b8.setBackgroundColor(Color.GREEN); 
+        b8.invalidate(); 
+ 
+        b9 = (Button)findViewById(R.id.button9); 
+        b9Color = &quot;green&quot;; 
+        b9.setBackgroundColor(Color.GREEN); 
+        b9.invalidate(); 
+ 
+        b10 = (Button)findViewById(R.id.button10); 
+        b10Color = &quot;green&quot;; 
+        b10.setBackgroundColor(Color.GREEN); 
+        b10.invalidate(); 
+ 
+        b11 = (Button)findViewById(R.id.button11); 
+        b11Color = &quot;green&quot;; 
+        b11.setBackgroundColor(Color.GREEN); 
+        b11.invalidate(); 
+ 
+        b12 = (Button)findViewById(R.id.button12); 
+        b12Color = &quot;green&quot;; 
+        b12.setBackgroundColor(Color.GREEN); 
+        b12.invalidate(); 
+ 
+        b13 = (Button)findViewById(R.id.button13); 
+        b13Color = &quot;green&quot;; 
+        b13.setBackgroundColor(Color.GREEN); 
+        b13.invalidate(); 
+ 
+        b14 = (Button)findViewById(R.id.button14); 
+        b14Color = &quot;green&quot;; 
+        b14.setBackgroundColor(Color.GREEN); 
+        b14.invalidate(); 
+ 
+        b15 = (Button)findViewById(R.id.button15); 
+        b15Color = &quot;green&quot;; 
+        b15.setBackgroundColor(Color.GREEN); 
+        b15.invalidate(); 
+ 
+        */</span><span class="s1"> 
+ 
+        aClicker = (Button) findViewById(R.id.buttonA); 
+        clickedList[</span><span class="s3">0</span><span class="s1">] = aClicker; 
+        bClicker = (Button) findViewById(R.id.buttonB); 
+        clickedList[</span><span class="s3">1</span><span class="s1">] = bClicker; 
+        cClicker = (Button) findViewById(R.id.buttonC); 
+        clickedList[</span><span class="s3">2</span><span class="s1">] = cClicker; 
+        dClicker = (Button) findViewById(R.id.buttonD); 
+        clickedList[</span><span class="s3">3</span><span class="s1">] = dClicker; 
+        eClicker = (Button) findViewById(R.id.buttonE); 
+        clickedList[</span><span class="s3">4</span><span class="s1">] = eClicker; 
+        fClicker = (Button) findViewById(R.id.buttonF); 
+        clickedList[</span><span class="s3">5</span><span class="s1">] = fClicker; 
+        gClicker = (Button) findViewById(R.id.buttonG); 
+        clickedList[</span><span class="s3">6</span><span class="s1">] = gClicker; 
+        hClicker = (Button) findViewById(R.id.buttonH); 
+        clickedList[</span><span class="s3">7</span><span class="s1">] = hClicker; 
+        iClicker = (Button) findViewById(R.id.buttonI); 
+        clickedList[</span><span class="s3">8</span><span class="s1">] = iClicker; 
+        jClicker = (Button) findViewById(R.id.buttonJ); 
+        clickedList[</span><span class="s3">9</span><span class="s1">] = jClicker; 
+ 
+        zeroButtonClicked(); 
+    } 
+ 
+ 
+    </span><span class="s0">void </span><span class="s1">buttonInfo(){ 
+        b0 = (Button)findViewById(R.id.button0); 
+        b0.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b0Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b0Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b0.invalidate(); 
+ 
+        b1 = (Button)findViewById(R.id.button1); 
+        b1.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b1Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b1Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b1.invalidate(); 
+ 
+        b2 = (Button)findViewById(R.id.button2); 
+        b2.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b2Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b2Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b2.invalidate(); 
+ 
+        b3 = (Button)findViewById(R.id.button3); 
+        b3.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b3Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b3Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b3.invalidate(); 
+ 
+        b4 = (Button)findViewById(R.id.button4); 
+        b4.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b4Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b4Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b4.invalidate(); 
+ 
+        b5 = (Button)findViewById(R.id.button5); 
+        b5.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b5Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b5Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b5.invalidate(); 
+ 
+        b6 = (Button)findViewById(R.id.button6); 
+        b6.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b6Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b6Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b6.invalidate(); 
+ 
+        b7 = (Button)findViewById(R.id.button7); 
+        b7.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b7Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b7Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b7.invalidate(); 
+ 
+        b8 = (Button)findViewById(R.id.button8); 
+        b8.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b8Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b8Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b8.invalidate(); 
+ 
+        b9 = (Button)findViewById(R.id.button9); 
+        b9.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b9Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b9Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b9.invalidate(); 
+ 
+        b10 = (Button)findViewById(R.id.button10); 
+        b10.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b10Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b10Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b10.invalidate(); 
+ 
+        b11 = (Button)findViewById(R.id.button11); 
+        b11.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b11Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b11Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b11.invalidate(); 
+ 
+        b12 = (Button)findViewById(R.id.button12); 
+        b12.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b12Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b12Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b12.invalidate(); 
+ 
+        b13 = (Button)findViewById(R.id.button13); 
+        b13.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b13Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b13Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b13.invalidate(); 
+ 
+        b14 = (Button)findViewById(R.id.button14); 
+        b14.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b14Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b14Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b14.invalidate(); 
+ 
+        b15 = (Button)findViewById(R.id.button15); 
+        b15.setBackgroundColor(randomColor()); 
+        </span><span class="s0">if </span><span class="s1">(colorOfButton == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b15Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b15Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        b15.invalidate(); 
+ 
+    } 
+ 
+    </span><span class="s0">int </span><span class="s1">randomColor(){ 
+        </span><span class="s0">double </span><span class="s1">randomNumber = Math.random(); 
+        </span><span class="s0">if</span><span class="s1">(randomNumber &gt; </span><span class="s3">.5</span><span class="s1">){ 
+            colorOfButton = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+            </span><span class="s0">return </span><span class="s1">Color.CYAN; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            colorOfButton = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+            </span><span class="s0">return </span><span class="s1">Color.GREEN; 
+        } 
+    } 
+ 
+ 
+    </span><span class="s0">public boolean </span><span class="s1">boardFull(){ 
+        </span><span class="s0">if </span><span class="s1">(b0Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b1Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b2Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b3Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1"> 
+                &amp;&amp; b4Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b5Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b6Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1"> 
+                &amp;&amp; b7Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b8Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b9Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1"> 
+                &amp;&amp; b10Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b11Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b12Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1"> 
+                &amp;&amp; b13Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b14Color == </span><span class="s2">&quot;cyan&quot; </span><span class="s1">&amp;&amp; b15Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+ 
+ 
+            Toast.makeText(MainActivity.</span><span class="s0">this</span><span class="s1">, </span><span class="s2">&quot;CONGRATS! YOU WON!&quot;</span><span class="s1">, 
+                    Toast.LENGTH_SHORT).show(); 
+            </span><span class="s0">return true</span><span class="s1">; 
+ 
+ 
+        } 
+        </span><span class="s0">if </span><span class="s1">(b0Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b1Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b2Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b3Color == </span><span class="s2">&quot;green&quot;</span><span class="s1"> 
+                &amp;&amp; b4Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b5Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b6Color == </span><span class="s2">&quot;green&quot;</span><span class="s1"> 
+                &amp;&amp; b7Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b8Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b9Color == </span><span class="s2">&quot;green&quot;</span><span class="s1"> 
+                &amp;&amp; b10Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b11Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b12Color == </span><span class="s2">&quot;green&quot;</span><span class="s1"> 
+                &amp;&amp; b13Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b14Color == </span><span class="s2">&quot;green&quot; </span><span class="s1">&amp;&amp; b15Color == </span><span class="s2">&quot;green&quot;</span><span class="s1">){ 
+ 
+ 
+            Toast.makeText(MainActivity.</span><span class="s0">this</span><span class="s1">, </span><span class="s2">&quot;CONGRATS! YOU WON!&quot;</span><span class="s1">, 
+                    Toast.LENGTH_SHORT).show(); 
+            </span><span class="s0">return true</span><span class="s1">; 
+ 
+        } 
+        </span><span class="s0">return false</span><span class="s1">; 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedA(View v){ 
+ 
+        aClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b0Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b0.setBackgroundColor(Color.GREEN); 
+            b0Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b0.setBackgroundColor(Color.CYAN); 
+            b0Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b1Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b1.setBackgroundColor(Color.GREEN); 
+            b1Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b1.setBackgroundColor(Color.CYAN); 
+            b1Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b2Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b2.setBackgroundColor(Color.GREEN); 
+            b2Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b2.setBackgroundColor(Color.CYAN); 
+            b2Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedB(View v){ 
+ 
+        bClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b3Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b3.setBackgroundColor(Color.GREEN); 
+            b3Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b3.setBackgroundColor(Color.CYAN); 
+            b3Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b7Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b7.setBackgroundColor(Color.GREEN); 
+            b7Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b7.setBackgroundColor(Color.CYAN); 
+            b7Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b9Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b9.setBackgroundColor(Color.GREEN); 
+            b9Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b9.setBackgroundColor(Color.CYAN); 
+            b9Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b11Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b11.setBackgroundColor(Color.GREEN); 
+            b11Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b11.setBackgroundColor(Color.CYAN); 
+            b11Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedC(View v){ 
+ 
+        cClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b4Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b4.setBackgroundColor(Color.GREEN); 
+            b4Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b4.setBackgroundColor(Color.CYAN); 
+            b4Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b10Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b10.setBackgroundColor(Color.GREEN); 
+            b10Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b10.setBackgroundColor(Color.CYAN); 
+            b10Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b14Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b14.setBackgroundColor(Color.GREEN); 
+            b14Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b14.setBackgroundColor(Color.CYAN); 
+            b14Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b15Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b15.setBackgroundColor(Color.GREEN); 
+            b15Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b15.setBackgroundColor(Color.CYAN); 
+            b15Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedD(View v){ 
+ 
+        dClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b0Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b0.setBackgroundColor(Color.GREEN); 
+            b0Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b0.setBackgroundColor(Color.CYAN); 
+            b0Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b4Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b4.setBackgroundColor(Color.GREEN); 
+            b4Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b4.setBackgroundColor(Color.CYAN); 
+            b4Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b5Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b5.setBackgroundColor(Color.GREEN); 
+            b5Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b5.setBackgroundColor(Color.CYAN); 
+            b5Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b6Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b6.setBackgroundColor(Color.GREEN); 
+            b6Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b6.setBackgroundColor(Color.CYAN); 
+            b6Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b7Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b7.setBackgroundColor(Color.GREEN); 
+            b7Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b7.setBackgroundColor(Color.CYAN); 
+            b7Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedE(View v){ 
+ 
+        eClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b12Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b12.setBackgroundColor(Color.GREEN); 
+            b12Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b12.setBackgroundColor(Color.CYAN); 
+            b12Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b10Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b10.setBackgroundColor(Color.GREEN); 
+            b10Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b10.setBackgroundColor(Color.CYAN); 
+            b10Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b8Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b8.setBackgroundColor(Color.GREEN); 
+            b8Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b8.setBackgroundColor(Color.CYAN); 
+            b8Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b6Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b6.setBackgroundColor(Color.GREEN); 
+            b6Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b6.setBackgroundColor(Color.CYAN); 
+            b6Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b7Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b7.setBackgroundColor(Color.GREEN); 
+            b7Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b7.setBackgroundColor(Color.CYAN); 
+            b7Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedF(View v){ 
+ 
+        fClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b0Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b0.setBackgroundColor(Color.GREEN); 
+            b0Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b0.setBackgroundColor(Color.CYAN); 
+            b0Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b2Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b2.setBackgroundColor(Color.GREEN); 
+            b2Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b2.setBackgroundColor(Color.CYAN); 
+            b2Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b15Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b15.setBackgroundColor(Color.GREEN); 
+            b15Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b15.setBackgroundColor(Color.CYAN); 
+            b15Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b14Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b14.setBackgroundColor(Color.GREEN); 
+            b14Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b14.setBackgroundColor(Color.CYAN); 
+            b14Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedG(View v){ 
+ 
+        gClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b3Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b3.setBackgroundColor(Color.GREEN); 
+            b3Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b3.setBackgroundColor(Color.CYAN); 
+            b3Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b15Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b15.setBackgroundColor(Color.GREEN); 
+            b15Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b15.setBackgroundColor(Color.CYAN); 
+            b15Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b14Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b14.setBackgroundColor(Color.GREEN); 
+            b14Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b14.setBackgroundColor(Color.CYAN); 
+            b14Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedH(View v){ 
+ 
+        hClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b4Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b4.setBackgroundColor(Color.GREEN); 
+            b4Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b4.setBackgroundColor(Color.CYAN); 
+            b4Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b5Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b5.setBackgroundColor(Color.GREEN); 
+            b5Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b5.setBackgroundColor(Color.CYAN); 
+            b5Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b7Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b7.setBackgroundColor(Color.GREEN); 
+            b7Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b7.setBackgroundColor(Color.CYAN); 
+            b7Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b15Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b15.setBackgroundColor(Color.GREEN); 
+            b15Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b15.setBackgroundColor(Color.CYAN); 
+            b15Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b14Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b14.setBackgroundColor(Color.GREEN); 
+            b14Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b14.setBackgroundColor(Color.CYAN); 
+            b14Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedI(View v){ 
+ 
+        iClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b3Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b3.setBackgroundColor(Color.GREEN); 
+            b3Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b3.setBackgroundColor(Color.CYAN); 
+            b3Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b1Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b1.setBackgroundColor(Color.GREEN); 
+            b1Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b1.setBackgroundColor(Color.CYAN); 
+            b1Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b2Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b2.setBackgroundColor(Color.GREEN); 
+            b2Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b2.setBackgroundColor(Color.CYAN); 
+            b2Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b4Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b4.setBackgroundColor(Color.GREEN); 
+            b4Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b4.setBackgroundColor(Color.CYAN); 
+            b4Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b5Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b5.setBackgroundColor(Color.GREEN); 
+            b5Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b5.setBackgroundColor(Color.CYAN); 
+            b5Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedJ(View v){ 
+ 
+        jClicked = Boolean.TRUE; 
+        count++; 
+        whatClicked(); 
+ 
+        </span><span class="s0">if </span><span class="s1">(b4Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b4.setBackgroundColor(Color.GREEN); 
+            b4Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b4.setBackgroundColor(Color.CYAN); 
+            b4Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b3Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b3.setBackgroundColor(Color.GREEN); 
+            b3Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b3.setBackgroundColor(Color.CYAN); 
+            b3Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b5Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b5.setBackgroundColor(Color.GREEN); 
+            b5Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b5.setBackgroundColor(Color.CYAN); 
+            b5Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b9Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b9.setBackgroundColor(Color.GREEN); 
+            b9Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b9.setBackgroundColor(Color.CYAN); 
+            b9Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        </span><span class="s0">if </span><span class="s1">(b13Color == </span><span class="s2">&quot;cyan&quot;</span><span class="s1">){ 
+            b13.setBackgroundColor(Color.GREEN); 
+            b13Color = </span><span class="s2">&quot;green&quot;</span><span class="s1">; 
+        } 
+        </span><span class="s0">else </span><span class="s1">{ 
+            b13.setBackgroundColor(Color.CYAN); 
+            b13Color = </span><span class="s2">&quot;cyan&quot;</span><span class="s1">; 
+        } 
+ 
+        boardFull(); 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">clickedRestart(View v){ 
+        restartClicked = Boolean.TRUE; 
+        whatClicked(); 
+    } 
+ 
+ 
+    </span><span class="s0">public </span><span class="s1">String getTheTag(Button b){ 
+        String tag = b.getTag().toString(); 
+        </span><span class="s0">return </span><span class="s1">tag; 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">autoSolve(View v){ 
+        boardFull(); 
+        oneButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+        twoButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+ 
+        threeButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+        fourButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+        fiveButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+        sixButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+        sevenButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+        eightButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+        nineButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+        tenButtonClicked(v); 
+        </span><span class="s0">if</span><span class="s1">(boardFull()){ 
+            </span><span class="s0">return</span><span class="s1">; 
+        } 
+ 
+        seq.setText(</span><span class="s2">&quot;Sequence: &quot;</span><span class="s1">); 
+        mc.setText(</span><span class="s2">&quot;Move Count: &quot;</span><span class="s1">); 
+        Toast.makeText(MainActivity.</span><span class="s0">this</span><span class="s1">, </span><span class="s2">&quot;NO SOLUTION&quot;</span><span class="s1">, 
+                Toast.LENGTH_SHORT).show(); 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">zeroButtonClicked(){ 
+            </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot;</span><span class="s1">; 
+                seq.setText(fullSeqPhrase); 
+                mc.setText(</span><span class="s2">&quot;Move Count: &quot;</span><span class="s1">); 
+                </span><span class="s0">return</span><span class="s1">; 
+            } 
+        } 
+ 
+    </span><span class="s0">public void </span><span class="s1">oneButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+ 
+            </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM); 
+                seq.setText(fullSeqPhrase); 
+                mc.setText(</span><span class="s2">&quot;Move Count: 1&quot;</span><span class="s1">); 
+                </span><span class="s0">return</span><span class="s1">; 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                butM.performClick(); 
+            } 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">twoButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+ 
+                </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                    String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN); 
+                    String fullMCPhrase = </span><span class="s2">&quot;Move Count: 2&quot;</span><span class="s1">; 
+                    seq.setText(fullSeqPhrase); 
+                    mc.setText(fullMCPhrase); 
+                    </span><span class="s0">return</span><span class="s1">; 
+                } </span><span class="s0">else </span><span class="s1">{ 
+                    butN.performClick(); 
+                } 
+            } 
+            butM.performClick(); 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">threeButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">o = n; o &lt; clickedList.length; o++) { 
+                    Button butO = clickedList[o]; 
+                    butO.performClick(); 
+ 
+                    </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                        String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN) + getTheTag(butO); 
+                        String fullMCPhrase = </span><span class="s2">&quot;Move Count: 3&quot;</span><span class="s1">; 
+                        seq.setText(fullSeqPhrase); 
+                        mc.setText(fullMCPhrase); 
+                        </span><span class="s0">return</span><span class="s1">; 
+                    } </span><span class="s0">else </span><span class="s1">{ 
+                        butO.performClick(); 
+                    } 
+                } 
+                butN.performClick(); 
+            } 
+            butM.performClick(); 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">fourButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">o = n; o &lt; clickedList.length; o++) { 
+                    Button butO = clickedList[o]; 
+                    butO.performClick(); 
+                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">p = o; p &lt; clickedList.length; p++) { 
+                        Button butP = clickedList[p]; 
+                        butP.performClick(); 
+ 
+                        </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                            String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN) + getTheTag(butO) 
+                                    + getTheTag(butP); 
+                            String fullMCPhrase = </span><span class="s2">&quot;Move Count: 4&quot;</span><span class="s1">; 
+                            seq.setText(fullSeqPhrase); 
+                            mc.setText(fullMCPhrase); 
+                            </span><span class="s0">return</span><span class="s1">; 
+                        } </span><span class="s0">else </span><span class="s1">{ 
+                            butP.performClick(); 
+                        } 
+                    } 
+                    butO.performClick(); 
+                } 
+                butN.performClick(); 
+            } 
+            butM.performClick(); 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">fiveButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">o = n; o &lt; clickedList.length; o++) { 
+                    Button butO = clickedList[o]; 
+                    butO.performClick(); 
+                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">p = o; p &lt; clickedList.length; p++) { 
+                        Button butP = clickedList[p]; 
+                        butP.performClick(); 
+                        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">q = p; q &lt; clickedList.length; q++) { 
+                            Button butQ = clickedList[q]; 
+                            butQ.performClick(); 
+ 
+                            </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                                String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN) + getTheTag(butO) 
+                                        + getTheTag(butP) + getTheTag(butQ); 
+                                String fullMCPhrase = </span><span class="s2">&quot;Move Count: 5&quot;</span><span class="s1">; 
+                                seq.setText(fullSeqPhrase); 
+                                mc.setText(fullMCPhrase); 
+                                </span><span class="s0">return</span><span class="s1">; 
+                            } </span><span class="s0">else </span><span class="s1">{ 
+                                butQ.performClick(); 
+                            } 
+                        } 
+                        butP.performClick(); 
+                    } 
+                    butO.performClick(); 
+                } 
+                butN.performClick(); 
+            } 
+            butM.performClick(); 
+        } 
+    } 
+ 
+ 
+    </span><span class="s0">public void </span><span class="s1">sixButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">o = n; o &lt; clickedList.length; o++) { 
+                    Button butO = clickedList[o]; 
+                    butO.performClick(); 
+                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">p = o; p &lt; clickedList.length; p++) { 
+                        Button butP = clickedList[p]; 
+                        butP.performClick(); 
+                        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">q = p; q &lt; clickedList.length; q++) { 
+                            Button butQ = clickedList[q]; 
+                            butQ.performClick(); 
+                            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">r = q; r &lt; clickedList.length; r++) { 
+                                Button butR = clickedList[r]; 
+                                butR.performClick(); 
+ 
+                                </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                                    String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN) 
+                                            + getTheTag(butO) + getTheTag(butP) + getTheTag(butQ) + getTheTag(butR); 
+                                    String fullMCPhrase = </span><span class="s2">&quot;Move Count: 6&quot;</span><span class="s1">; 
+                                    seq.setText(fullSeqPhrase); 
+                                    mc.setText(fullMCPhrase); 
+                                    </span><span class="s0">return</span><span class="s1">; 
+                                } </span><span class="s0">else </span><span class="s1">{ 
+                                    butR.performClick(); 
+                                } 
+                            } 
+                            butQ.performClick(); 
+                        } 
+                        butP.performClick(); 
+                    } 
+                    butO.performClick(); 
+                } 
+                butN.performClick(); 
+            } 
+            butM.performClick(); 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">sevenButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">o = n; o &lt; clickedList.length; o++) { 
+                    Button butO = clickedList[o]; 
+                    butO.performClick(); 
+                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">p = o; p &lt; clickedList.length; p++) { 
+                        Button butP = clickedList[p]; 
+                        butP.performClick(); 
+                        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">q = p; q &lt; clickedList.length; q++) { 
+                            Button butQ = clickedList[q]; 
+                            butQ.performClick(); 
+                            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">r = q; r &lt; clickedList.length; r++) { 
+                                Button butR = clickedList[r]; 
+                                butR.performClick(); 
+                                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">s = r; s &lt; clickedList.length; s++) { 
+                                    Button butS = clickedList[s]; 
+                                    butS.performClick(); 
+ 
+                                    </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                                        String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN) 
+                                                + getTheTag(butO) + getTheTag(butP) + getTheTag(butQ) + getTheTag(butR) 
+                                                + getTheTag(butS); 
+                                        String fullMCPhrase = </span><span class="s2">&quot;Move Count: 7&quot;</span><span class="s1">; 
+                                        seq.setText(fullSeqPhrase); 
+                                        mc.setText(fullMCPhrase); 
+                                        </span><span class="s0">return</span><span class="s1">; 
+                                    } </span><span class="s0">else </span><span class="s1">{ 
+                                        butS.performClick(); 
+                                    } 
+                                } 
+                                butR.performClick(); 
+                            } 
+                            butQ.performClick(); 
+                        } 
+                        butP.performClick(); 
+                    } 
+                    butO.performClick(); 
+                } 
+                butN.performClick(); 
+            } 
+            butM.performClick(); 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">eightButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">o = n; o &lt; clickedList.length; o++) { 
+                    Button butO = clickedList[o]; 
+                    butO.performClick(); 
+                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">p = o; p &lt; clickedList.length; p++) { 
+                        Button butP = clickedList[p]; 
+                        butP.performClick(); 
+                        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">q = p; q &lt; clickedList.length; q++) { 
+                            Button butQ = clickedList[q]; 
+                            butQ.performClick(); 
+                            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">r = q; r &lt; clickedList.length; r++) { 
+                                Button butR = clickedList[r]; 
+                                butR.performClick(); 
+                                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">s = r; s &lt; clickedList.length; s++) { 
+                                    Button butS = clickedList[s]; 
+                                    butS.performClick(); 
+                                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">t = s; t &lt; clickedList.length; t++) { 
+                                        Button butT = clickedList[t]; 
+                                        butT.performClick(); 
+ 
+                                        </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                                            String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN) 
+                                                    + getTheTag(butO) + getTheTag(butP) + getTheTag(butQ) + getTheTag(butR) 
+                                                    + getTheTag(butS) + getTheTag(butT); 
+                                            String fullMCPhrase = </span><span class="s2">&quot;Move Count: 8&quot;</span><span class="s1">; 
+                                            seq.setText(fullSeqPhrase); 
+                                            mc.setText(fullMCPhrase); 
+                                            </span><span class="s0">return</span><span class="s1">; 
+                                        } </span><span class="s0">else </span><span class="s1">{ 
+                                            butT.performClick(); 
+                                        } 
+                                    } 
+                                    butS.performClick(); 
+                                } 
+                                butR.performClick(); 
+                            } 
+                            butQ.performClick(); 
+                        } 
+                        butP.performClick(); 
+                    } 
+                    butO.performClick(); 
+                } 
+                butN.performClick(); 
+            } 
+            butM.performClick(); 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">nineButtonClicked(View v){ 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">o = n; o &lt; clickedList.length; o++) { 
+                    Button butO = clickedList[o]; 
+                    butO.performClick(); 
+                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">p = o; p &lt; clickedList.length; p++) { 
+                        Button butP = clickedList[p]; 
+                        butP.performClick(); 
+                        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">q = p; q &lt; clickedList.length; q++) { 
+                            Button butQ = clickedList[q]; 
+                            butQ.performClick(); 
+                            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">r = q; r &lt; clickedList.length; r++) { 
+                                Button butR = clickedList[r]; 
+                                butR.performClick(); 
+                                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">s = r; s &lt; clickedList.length; s++) { 
+                                    Button butS = clickedList[s]; 
+                                    butS.performClick(); 
+                                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">t = s; t &lt; clickedList.length; t++) { 
+                                        Button butT = clickedList[t]; 
+                                        butT.performClick(); 
+                                        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">u = t; u &lt; clickedList.length; u++) { 
+                                            Button butU = clickedList[u]; 
+                                            butU.performClick(); 
+ 
+                                            </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                                                String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN) 
+                                                        + getTheTag(butO) + getTheTag(butP) + getTheTag(butQ) + getTheTag(butR) 
+                                                        + getTheTag(butS) + getTheTag(butT) + getTheTag(butU); 
+                                                String fullMCPhrase = </span><span class="s2">&quot;Move Count: 9&quot;</span><span class="s1">; 
+                                                seq.setText(fullSeqPhrase); 
+                                                mc.setText(fullMCPhrase); 
+                                                </span><span class="s0">return</span><span class="s1">; 
+                                            } </span><span class="s0">else </span><span class="s1">{ 
+                                                butU.performClick(); 
+                                            } 
+                                        } 
+                                        butT.performClick(); 
+                                    } 
+                                    butS.performClick(); 
+                                } 
+                                butR.performClick(); 
+                            } 
+                            butQ.performClick(); 
+                        } 
+                        butP.performClick(); 
+                    } 
+                    butO.performClick(); 
+                } 
+                butN.performClick(); 
+            } 
+            butM.performClick(); 
+        } 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">tenButtonClicked(View v) { 
+        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">m = </span><span class="s3">0</span><span class="s1">; m&lt;clickedList.length; m++) { 
+            Button butM = clickedList[m]; 
+            butM.performClick(); 
+            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">n = m; n&lt;clickedList.length; n++) { 
+                Button butN = clickedList[n]; 
+                butN.performClick(); 
+                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">o = n; o &lt; clickedList.length; o++) { 
+                    Button butO = clickedList[o]; 
+                    butO.performClick(); 
+                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">p = o; p &lt; clickedList.length; p++) { 
+                        Button butP = clickedList[p]; 
+                        butP.performClick(); 
+                        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">q = p; q &lt; clickedList.length; q++) { 
+                            Button butQ = clickedList[q]; 
+                            butQ.performClick(); 
+                            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">r = q; r &lt; clickedList.length; r++) { 
+                                Button butR = clickedList[r]; 
+                                butR.performClick(); 
+                                </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">s = r; s &lt; clickedList.length; s++) { 
+                                    Button butS = clickedList[s]; 
+                                    butS.performClick(); 
+                                    </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">t = s; t &lt; clickedList.length; t++) { 
+                                        Button butT = clickedList[t]; 
+                                        butT.performClick(); 
+                                        </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">u = t; u &lt; clickedList.length; u++) { 
+                                            Button butU = clickedList[u]; 
+                                            butU.performClick(); 
+                                            </span><span class="s0">for </span><span class="s1">(</span><span class="s0">int </span><span class="s1">x = u; x &lt; clickedList.length; x++) { 
+                                                Button butX = clickedList[x]; 
+                                                butX.performClick(); 
+ 
+                                                </span><span class="s0">if </span><span class="s1">(boardFull()) { 
+                                                    String fullSeqPhrase = </span><span class="s2">&quot;Sequence: &quot; </span><span class="s1">+ getTheTag(butM) + getTheTag(butN) 
+                                                            + getTheTag(butO) + getTheTag(butP) + getTheTag(butQ) + getTheTag(butR) 
+                                                            + getTheTag(butS) + getTheTag(butT) + getTheTag(butU) + getTheTag(butX); 
+                                                    String fullMCPhrase = </span><span class="s2">&quot;Move Count: 10&quot;</span><span class="s1">; 
+                                                    seq.setText(fullSeqPhrase); 
+                                                    mc.setText(fullMCPhrase); 
+                                                    </span><span class="s0">return</span><span class="s1">; 
+                                                } </span><span class="s0">else </span><span class="s1">{ 
+                                                    butX.performClick(); 
+                                                } 
+                                            } 
+                                            butU.performClick(); 
+                                        } 
+                                        butT.performClick(); 
+                                    } 
+                                    butS.performClick(); 
+                                } 
+                                butR.performClick(); 
+                            } 
+                            butQ.performClick(); 
+                        } 
+                        butP.performClick(); 
+                    } 
+                    butO.performClick(); 
+                } 
+                butN.performClick(); 
+            } 
+            butM.performClick(); 
+        } 
+ 
+    } 
+ 
+    </span><span class="s0">void </span><span class="s1">whatClicked(){ 
+        </span><span class="s0">if </span><span class="s1">(aClicked == Boolean.TRUE){ 
+            String fullASeqPhrase = sequencePhrase + </span><span class="s2">&quot;A&quot;</span><span class="s1">; 
+            String fullAMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullASeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;A&quot;</span><span class="s1">; 
+            mc.setText(fullAMcPhrase); 
+            aClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(bClicked == Boolean.TRUE){ 
+            String fullBSeqPhrase = sequencePhrase + </span><span class="s2">&quot;B&quot;</span><span class="s1">; 
+            String fullBMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullBSeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;B&quot;</span><span class="s1">; 
+            mc.setText(fullBMcPhrase); 
+            bClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(cClicked == Boolean.TRUE){ 
+            String fullCSeqPhrase = sequencePhrase + </span><span class="s2">&quot;C&quot;</span><span class="s1">; 
+            String fullCMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullCSeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;C&quot;</span><span class="s1">; 
+            mc.setText(fullCMcPhrase); 
+            cClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(dClicked == Boolean.TRUE){ 
+            String fullDSeqPhrase = sequencePhrase + </span><span class="s2">&quot;D&quot;</span><span class="s1">; 
+            String fullDMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullDSeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;D&quot;</span><span class="s1">; 
+            mc.setText(fullDMcPhrase); 
+            dClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(eClicked == Boolean.TRUE){ 
+            String fullESeqPhrase = sequencePhrase + </span><span class="s2">&quot;E&quot;</span><span class="s1">; 
+            String fullEMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullESeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;E&quot;</span><span class="s1">; 
+            mc.setText(fullEMcPhrase); 
+            eClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(fClicked == Boolean.TRUE){ 
+            String fullFSeqPhrase = sequencePhrase + </span><span class="s2">&quot;F&quot;</span><span class="s1">; 
+            String fullFMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullFSeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;F&quot;</span><span class="s1">; 
+            mc.setText(fullFMcPhrase); 
+            fClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(gClicked == Boolean.TRUE){ 
+            String fullGSeqPhrase = sequencePhrase + </span><span class="s2">&quot;G&quot;</span><span class="s1">; 
+            String fullGMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullGSeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;G&quot;</span><span class="s1">; 
+            mc.setText(fullGMcPhrase); 
+            gClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(hClicked == Boolean.TRUE){ 
+            String fullHSeqPhrase = sequencePhrase + </span><span class="s2">&quot;H&quot;</span><span class="s1">; 
+            String fullHMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullHSeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;H&quot;</span><span class="s1">; 
+            mc.setText(fullHMcPhrase); 
+            hClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(iClicked == Boolean.TRUE){ 
+            String fullISeqPhrase = sequencePhrase + </span><span class="s2">&quot;I&quot;</span><span class="s1">; 
+            String fullIMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullISeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;I&quot;</span><span class="s1">; 
+            mc.setText(fullIMcPhrase); 
+            iClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if </span><span class="s1">(jClicked == Boolean.TRUE){ 
+            String fullJSeqPhrase = sequencePhrase + </span><span class="s2">&quot;J&quot;</span><span class="s1">; 
+            String fullJMcPhrase = moveCountPhrase + count; 
+            seq.setText(fullJSeqPhrase); 
+            sequencePhrase = sequencePhrase + </span><span class="s2">&quot;J&quot;</span><span class="s1">; 
+            mc.setText(fullJMcPhrase); 
+            jClicked = Boolean.FALSE; 
+        } 
+        </span><span class="s0">if</span><span class="s1">(restartClicked == Boolean.TRUE){ 
+            buttonInfo(); 
+            sequencePhrase = </span><span class="s2">&quot;Sequence: &quot;</span><span class="s1">; 
+            seq.setText(sequencePhrase); 
+            count = </span><span class="s3">0</span><span class="s1">; 
+            moveCountPhrase = </span><span class="s2">&quot;Move Count: &quot;</span><span class="s1">; 
+            mc.setText(moveCountPhrase); 
+            restartClicked = Boolean.FALSE; 
+        } 
+    } 
+ 
+} 
+</span></pre>
+</body>
+</html>
